@@ -18,9 +18,10 @@ public class Function4 {
     }
 
     public void find(){
+        String sql ="select * from employee where Title like '%Sales%' '%Agent%'";
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from employee where Title like '%Sales%'");
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
                 int id = resultSet.getInt("EmployeeId");
                 String fn = resultSet.getString("FirstName");

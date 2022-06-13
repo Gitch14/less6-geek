@@ -2,7 +2,6 @@ package task1;
 
 import db.DBManager;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,9 +18,10 @@ public class Function10 {
     }
 
     public void find(){
+        String sql = "select InvoiceId, count(*) from invoiceline group by InvoiceId order by count(*) desc";
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT InvoiceId, count(*) from invoiceline group by InvoiceId");
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
                 int id = resultSet.getInt("InvoiceId");
                 int count = resultSet.getInt("count(*)");

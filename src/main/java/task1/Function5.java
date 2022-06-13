@@ -18,9 +18,10 @@ public class Function5 {
     }
 
     public void find(){
+        String sql = "select BillingCountry from invoice group by BillingCountry";
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select BillingCountry from invoice group by BillingCountry");
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
                 String BillingCountry = resultSet.getString("BillingCountry");
                 System.out.println(BillingCountry);

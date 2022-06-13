@@ -2,10 +2,6 @@ package task1;
 
 import db.DBManager;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,9 +18,10 @@ public class Function2 {
     }
 
     public void find(){
+        String sql = "select * from customer where Country = 'Brazil'";
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from customer where Country = 'Brazil'");
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
                 int id = resultSet.getInt("CustomerId");
                 String fn = resultSet.getString("FirstName");

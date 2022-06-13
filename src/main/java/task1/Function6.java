@@ -18,13 +18,15 @@ public class Function6 {
     }
 
     public void find(){
+        String sql = "select employee.FirstName,employee.LastName, i.Total from employee left outer join customer c on employee.EmployeeId = c.SupportRepId left join invoice i on c.CustomerId = i.CustomerId group by i.Total desc";
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT employee.FirstName,employee.LastName from employee left outer join customer c on employee.EmployeeId = c.SupportRepId left join invoice i on c.CustomerId = i.CustomerId");
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
                 String fn = resultSet.getString("FirstName");
                 String ln = resultSet.getString("LastName");
-                System.out.println(fn + " " + ln );
+                double total = resultSet.getDouble("i.Total");
+                System.out.println(fn + " " + ln + " | " + total);
             }
 
             } catch (SQLException ex) {

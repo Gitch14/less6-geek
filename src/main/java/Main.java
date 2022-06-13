@@ -34,6 +34,7 @@ public class Main {
             n1 = scanner.nextInt();
         } while (n1 == 1);
 
+        /*
         int n2 = 0;
         do {
 
@@ -75,6 +76,8 @@ public class Main {
             n3 = scanner.nextInt();
         } while (n3 == 1);
 
+
+         */
 
     }
 }

@@ -2,7 +2,6 @@ package task1;
 
 import db.DBManager;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,9 +18,10 @@ public class Function8 {
     }
 
     public void find(){
+        String sql ="select COUNT(InvoiceDate) from invoice where InvoiceDate like '%2009%'";
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet2009 = statement.executeQuery("select COUNT(InvoiceDate) from invoice where InvoiceDate like '%2009%'");
+            ResultSet resultSet2009 = statement.executeQuery(sql);
             while (resultSet2009.next()){
                 int count = resultSet2009.getInt("COUNT(InvoiceDate)");
                 System.out.println(count);

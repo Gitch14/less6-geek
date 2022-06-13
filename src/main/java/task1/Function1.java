@@ -2,7 +2,6 @@ package task1;
 
 import db.DBManager;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,9 +18,10 @@ public class Function1 {
     }
 
     public void find(){
+        String sql = "select CustomerId, FirstName, LastName, Country from customer where Country not like 'USA'";
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from customer");
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
                 int id = resultSet.getInt("CustomerId");
                 String fn = resultSet.getString("FirstName");
