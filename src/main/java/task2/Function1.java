@@ -18,9 +18,10 @@ public class Function1 {
     }
 
     public void find(){
+        String sql = "select Name,I2.Total from track left join invoiceline i on track.TrackId = i.TrackId left join invoice i2 on i2.InvoiceId = i.InvoiceId ORDER BY Total DESC";
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select Name,I2.Total from track left join invoiceline i on track.TrackId = i.TrackId left join invoice i2 on i2.InvoiceId = i.InvoiceId ORDER BY Total DESC");
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
                 double total = resultSet.getInt("I2.Total");
                 String name = resultSet.getString("Name");

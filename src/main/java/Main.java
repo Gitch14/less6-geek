@@ -11,7 +11,6 @@ public class Main {
         MenuTask2 menuTask2 = new MenuTask2();
         MenuTask3 menuTask3 = new MenuTask3();
 
-
         int n1 = 0;
         do {
 
@@ -34,7 +33,7 @@ public class Main {
             n1 = scanner.nextInt();
         } while (n1 == 1);
 
-        /*
+
         int n2 = 0;
         do {
 
@@ -77,7 +76,7 @@ public class Main {
         } while (n3 == 1);
 
 
-         */
+
 
     }
 }

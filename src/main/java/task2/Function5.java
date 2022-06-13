@@ -23,8 +23,10 @@ public class Function5 {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                String BillingCountry = resultSet.getString("BillingCountry");
-                System.out.println(BillingCountry);
+                String max = resultSet.getString("max(a.Title)");
+                String media = resultSet.getString("m.Name");
+                String genre = resultSet.getString("g.Name");
+                System.out.println(media + " | " + genre + " | " + max);
             }
 
             } catch (SQLException ex) {

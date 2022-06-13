@@ -23,9 +23,10 @@ public class Function10 {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                int id = resultSet.getInt("InvoiceId");
-                int count = resultSet.getInt("count(*)");
-                System.out.println(id + " | " + count);
+                String fn = resultSet.getString("employee.FirstName");
+                String ln = resultSet.getString("employee.LastName");
+                int count = resultSet.getInt("count(InvoiceId)");
+                System.out.println(fn + " " + ln + " | " + count);
             }
 
             } catch (SQLException ex) {

@@ -23,9 +23,16 @@ public class Function6 {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                String fn = resultSet.getString("FirstName");
-                String ln = resultSet.getString("LastName");
-                System.out.println(fn + " " + ln );
+                int id = resultSet.getInt("InvoiceLineId");
+                String date = resultSet.getString("InvoiceDate");
+                String country = resultSet.getString("BillingCountry");
+                String state = resultSet.getString("BillingState");
+                String city = resultSet.getString("BillingCity");
+                String address = resultSet.getString("BillingAddress");
+                String code = resultSet.getString("BillingPostalCode");
+                double total = resultSet.getDouble("Total");
+
+                System.out.println(id + " | " + date + " | " + country + " | " + state + " | " + city + " | " + address + " | " + code + " | " + total);
             }
 
             } catch (SQLException ex) {

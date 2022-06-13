@@ -23,12 +23,9 @@ public class Function3 {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                int id = resultSet.getInt("InvoiceId");
-                String fn = resultSet.getString("FirstName");
-                String ln = resultSet.getString("LastName");
-                String invoiceDate = resultSet.getString("InvoiceDate");
-                String country = resultSet.getString("BillingCountry");
-                System.out.println(id + " | " + fn + " " + ln + " | " + invoiceDate + " | " + country);
+                int count = resultSet.getInt("count(*)");
+                String country = resultSet.getString("max(BillingCountry)");
+                System.out.println(country + " | " + count);
             }
 
             } catch (SQLException ex) {

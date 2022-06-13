@@ -23,7 +23,7 @@ public class Function2 {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                String fn = resultSet.getString("t.Name");
+                String fn = resultSet.getString("t.Na1me");
                 String ln = resultSet.getString("a2.Name");
                 double untitPrice = resultSet.getDouble("t.UnitPrice");
                 double total = resultSet.getDouble("i.Total");

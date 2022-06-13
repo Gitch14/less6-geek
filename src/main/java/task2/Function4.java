@@ -21,15 +21,12 @@ public class Function4 {
         String sql = "select * from playlisttrack pt left join playlist p on p.PlaylistId = pt.PlaylistId left join playlisttrack p2 on p.PlaylistId = p2.PlaylistId";
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from employee where Title like '%Sales%'");
+            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                int id = resultSet.getInt("EmployeeId");
-                String fn = resultSet.getString("FirstName");
-                String ln = resultSet.getString("LastName");
-                String title = resultSet.getString("Title");
-                String email = resultSet.getString("Email");
-                String phone = resultSet.getString("Phone");
-                System.out.println(id + " | " + fn + " " + ln + " | " + title + " | " + email + " | " + phone);
+                int id1 = resultSet.getInt("pt.PlaylistId");
+                String name = resultSet.getString("Name");
+                int id2 = resultSet.getInt("pt.TrackId");
+                System.out.println(id1 + " | " + name + " | " + id2);
             }
 
             } catch (SQLException ex) {
