@@ -1,17 +1,19 @@
 package task3;
 
+import FileCreaters.FileCreate3;
 import db.DBManager;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Function7 {
+    FileCreate3 fileCreate = new FileCreate3();
 
     private final Connection connection;
-    // CustomerId,FirstName,LastName,Country
-
 
     public Function7() {
         connection = DBManager.getInstance().getConnection();
@@ -22,13 +24,16 @@ public class Function7 {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
+            FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
                 String name = resultSet.getString("Name");
                 int count = resultSet.getInt("count(i.InvoiceId)");
                 System.out.println(name + " | " + count);
             }
+            writer.write(sql + "  /* sql-7*/\n");
+            writer.close();
 
-            } catch (SQLException ex) {
+            } catch (SQLException | IOException ex) {
             ex.printStackTrace();
         }
 
