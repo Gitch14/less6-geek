@@ -13,7 +13,6 @@ import java.sql.Statement;
 public class Function1 {
 
     private final Connection connection;
-    // CustomerId,FirstName,LastName,Country
 
     FileCreate2 fileCreate = new FileCreate2();
 

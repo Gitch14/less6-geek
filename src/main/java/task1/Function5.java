@@ -14,7 +14,6 @@ public class Function5 {
     FileCreate1 fileCreate = new FileCreate1();
 
     private final Connection connection;
-    // CustomerId,FirstName,LastName,Country
 
 
     public Function5() {

@@ -1,6 +1,5 @@
 package task2;
 
-import FileCreaters.FileCreate1;
 import FileCreaters.FileCreate2;
 import db.DBManager;
 
@@ -15,7 +14,6 @@ public class Function5 {
     FileCreate2 fileCreate = new FileCreate2();
 
     private final Connection connection;
-    // CustomerId,FirstName,LastName,Country
 
 
     public Function5() {

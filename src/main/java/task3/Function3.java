@@ -14,8 +14,6 @@ public class Function3 {
     FileCreate3 fileCreate = new FileCreate3();
 
     private final Connection connection;
-    // CustomerId,FirstName,LastName,Country
-
 
     public Function3() {
         connection = DBManager.getInstance().getConnection();
