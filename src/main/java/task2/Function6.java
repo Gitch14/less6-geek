@@ -21,22 +21,15 @@ public class Function6 {
     }
 
     public void find(){
-        String sql = "select InvoiceLineId,InvoiceDate,BillingCountry,BillingState,BillingCity,BillingAddress,BillingPostalCode,Total from invoiceline left join invoice i on i.InvoiceId = invoiceline.InvoiceId";
+        String sql = "select i.InvoiceId, count(InvoiceLineId) as Number from invoiceline left join invoice i on i.InvoiceId = invoiceline.InvoiceId group by i.InvoiceId";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
-                int id = resultSet.getInt("InvoiceLineId");
-                String date = resultSet.getString("InvoiceDate");
-                String country = resultSet.getString("BillingCountry");
-                String state = resultSet.getString("BillingState");
-                String city = resultSet.getString("BillingCity");
-                String address = resultSet.getString("BillingAddress");
-                String code = resultSet.getString("BillingPostalCode");
-                double total = resultSet.getDouble("Total");
-
-                System.out.println(id + " | " + date + " | " + country + " | " + state + " | " + city + " | " + address + " | " + code + " | " + total);
+                int id = resultSet.getInt("i.InvoiceId");
+                int num = resultSet.getInt("Number");
+                System.out.println(id + " | " + num);
             }
             writer.write(sql + "  /* sql-6*/\n");
             writer.close();

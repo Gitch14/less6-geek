@@ -21,17 +21,16 @@ public class Function9 {
     }
 
     public void find(){
-        String sql = "select e.FirstName,e.LastName,sum(i.Total) from employee e left outer join customer c on e.EmployeeId = c.SupportRepId left join invoice i on c.CustomerId = i.CustomerId where Title like '%Sales%' '%Agent%' and InvoiceDate like '%2011%' limit 1";
+        String sql = "select concat(e.FirstName,' ',e.LastName) as FullName,sum(i.Total) as Total from employee e left outer join customer c on e.EmployeeId = c.SupportRepId left join invoice i on c.CustomerId = i.CustomerId where Title like '%Sales%' '%Agent%' and InvoiceDate like '%2011%' limit 1";
 
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
-                String fn = resultSet.getString("e.FirstName");
-                String ln = resultSet.getString("e.LastName");
-                int count = resultSet.getInt("sum(i.Total)");
-                System.out.println(fn + " " + ln + " | " + count);
+                String fn = resultSet.getString("FullName");
+                int count = resultSet.getInt("Total");
+                System.out.println(fn + " | " + count);
             }
             writer.write(sql + "  /* sql-9*/\n");
             writer.close();

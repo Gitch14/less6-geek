@@ -21,16 +21,15 @@ public class Function4 {
     }
 
     public void find(){
-        String sql = "select * from playlisttrack pt left join playlist p on p.PlaylistId = pt.PlaylistId left join playlisttrack p2 on p.PlaylistId = p2.PlaylistId";
+        String sql = "select CONCAT(playlist.PlaylistId,' ',Name) as PlayList,COUNT(p.TrackId) as Count from playlist left join playlisttrack p on playlist.PlaylistId = p.PlaylistId group by PlayList";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
-                int id1 = resultSet.getInt("pt.PlaylistId");
-                String name = resultSet.getString("Name");
-                int id2 = resultSet.getInt("pt.TrackId");
-                System.out.println(id1 + " | " + name + " | " + id2);
+                int count = resultSet.getInt("Count");
+                String name = resultSet.getString("PlayList");
+                System.out.println(name + " | " + count);
             }
             writer.write(sql + "  /* sql-4*/\n");
             writer.close();

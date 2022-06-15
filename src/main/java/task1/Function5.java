@@ -21,7 +21,7 @@ public class Function5 {
     }
 
     public void find(){
-        String sql = "select BillingCountry from invoice group by BillingCountry";
+        String sql = "select distinct BillingCountry from invoice";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);

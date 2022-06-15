@@ -21,16 +21,15 @@ public class Function6 {
     }
 
     public void find(){
-        String sql = "select employee.FirstName,employee.LastName, i.Total from employee left outer join customer c on employee.EmployeeId = c.SupportRepId left join invoice i on c.CustomerId = i.CustomerId group by i.Total desc";
+        String sql = "select *,concat(e.FirstName,' ', e.LastName) as FullName from employee e left outer join customer c on e.EmployeeId = c.SupportRepId left join invoice i on c.CustomerId = i.CustomerId order by i.Total desc";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
-                String fn = resultSet.getString("FirstName");
-                String ln = resultSet.getString("LastName");
+                String fn = resultSet.getString("FullName");
                 double total = resultSet.getDouble("i.Total");
-                System.out.println(fn + " " + ln + " | " + total);
+                System.out.println(fn + " | " + total);
             }
             writer.write(sql + "  /* sql-6*/\n");
             writer.close();

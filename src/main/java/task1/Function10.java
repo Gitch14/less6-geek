@@ -21,14 +21,14 @@ public class Function10 {
     }
 
     public void find(){
-        String sql = "select InvoiceId, count(*) from invoiceline group by InvoiceId order by count(*) desc";
+        String sql = "select InvoiceId, count(*) as Number from invoiceline group by InvoiceId order by number,InvoiceId desc";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
                 int id = resultSet.getInt("InvoiceId");
-                int count = resultSet.getInt("count(*)");
+                int count = resultSet.getInt("Number");
                 System.out.println(id + " | " + count);
             }
             writer.write(sql + "  /* sql-10*/\n");

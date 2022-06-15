@@ -21,18 +21,17 @@ public class Function3 {
     }
 
     public void find(){
-        String sql ="select c.FirstName,c.LastName,InvoiceId,InvoiceDate,BillingCountry from invoice inner join customer c on invoice.CustomerId = c.CustomerId where c.Country = 'Brazil'";
+        String sql ="select InvoiceId,concat(c.FirstName,' ', c.LastName) as FullName,InvoiceDate,BillingCountry from invoice inner join customer c on invoice.CustomerId = c.CustomerId where c.Country = 'Brazil'";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
                 int id = resultSet.getInt("InvoiceId");
-                String fn = resultSet.getString("c.FirstName");
-                String ln = resultSet.getString("c.LastName");
+                String fn = resultSet.getString("FullName");
                 String invoiceDate = resultSet.getString("InvoiceDate");
                 String country = resultSet.getString("BillingCountry");
-                System.out.println(id + " | " + fn + " " + ln + " | " + invoiceDate + " | " + country);
+                System.out.println(id + " | " + fn +  " | " + invoiceDate + " | " + country);
             }
             writer.write(sql + "  /* sql-3*/\n");
             writer.close();

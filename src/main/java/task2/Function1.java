@@ -23,14 +23,14 @@ public class Function1 {
     }
 
     public void find(){
-        String sql = "select Name,I2.Total from track left join invoiceline i on track.TrackId = i.TrackId left join invoice i2 on i2.InvoiceId = i.InvoiceId ORDER BY Total DESC";
+        String sql = "select i2.InvoiceId as Id,t.Name as Track from invoiceline i2 left join track t on t.TrackId = i2.TrackId group by i2.InvoiceId";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
-                double total = resultSet.getInt("I2.Total");
-                String name = resultSet.getString("Name");
+                double total = resultSet.getInt("Id");
+                String name = resultSet.getString("Track");
                 System.out.println(name + " | " + total);
 
             }

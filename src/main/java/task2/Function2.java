@@ -21,17 +21,16 @@ public class Function2 {
     }
 
     public void find(){
-        String sql = "select t.Name,a2.Name,t.UnitPrice,i.Total from invoiceline left join track t on invoiceline.TrackId = t.TrackId left join invoice i on i.InvoiceId = invoiceline.InvoiceId left join album a on a.AlbumId = t.AlbumId left join artist a2 on a2.ArtistId = a.ArtistId order by UnitPrice desc";
+        String sql = "select InvoiceLineId,t.Name as Track,a2.Name as Artist from invoiceline left join track t on invoiceline.TrackId = t.TrackId left join invoice i on i.InvoiceId = invoiceline.InvoiceId left join album a on a.AlbumId = t.AlbumId left join artist a2 on a2.ArtistId = a.ArtistId order by InvoiceLineId";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
-                String fn = resultSet.getString("t.Name");
-                String ln = resultSet.getString("a2.Name");
-                double untitPrice = resultSet.getDouble("t.UnitPrice");
-                double total = resultSet.getDouble("i.Total");
-                System.out.println(fn + " " + ln + " | " + untitPrice + " | " + total);
+                int id = resultSet.getInt("InvoiceLineId");
+                String fn = resultSet.getString("Track");
+                String ln = resultSet.getString("Artist");
+                System.out.println(id + " | " + fn + " " + ln);
             }
             writer.write(sql + "  /* sql-2*/\n");
             writer.close();
