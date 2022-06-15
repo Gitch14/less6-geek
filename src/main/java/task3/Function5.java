@@ -21,14 +21,14 @@ public class Function5 {
     }
 
     public void find(){
-        String sql = "select Name,count(Total/track.UnitPrice) from track left join invoiceline i on track.TrackId = i.TrackId left join invoice i2 on i2.InvoiceId = i.InvoiceId left join customer c on c.CustomerId = i2.CustomerId group by Name order by count(Total/track.UnitPrice) desc limit 5";
+        String sql = "select Name,count(i.TrackId) as Count from track t left join invoiceline i on t.TrackId = i.TrackId left join invoice i2 on i2.InvoiceId = i.InvoiceId left join customer c on c.CustomerId = i2.CustomerId group by t.Name order by Count desc limit 5";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
                 String Name = resultSet.getString("Name");
-                int count = resultSet.getInt("count(Total/track.UnitPrice)");
+                int count = resultSet.getInt("Count");
                 System.out.println(Name + " | " + count);
             }
             writer.write(sql + "  /* sql-5*/\n");

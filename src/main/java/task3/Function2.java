@@ -21,15 +21,16 @@ public class Function2 {
     }
 
     public void find(){
-        String sql = "select i.BillingCountry,count(Total) from customer left join invoice i on customer.CustomerId = i.CustomerId group by i.BillingCountry order by count(Total) desc";
+        String sql = "select i.BillingCountry,count(InvoiceId) as Count,sum(Total) as Sum from customer left join invoice i on customer.CustomerId = i.CustomerId group by i.BillingCountry order by count(Total) desc";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
                 String country = resultSet.getString("BillingCountry");
-                int count = resultSet.getInt("count(Total)");
-                System.out.println(country + " | " + count);
+                int count = resultSet.getInt("Count");
+                double sum = resultSet.getDouble("Sum");
+                System.out.println(country + " | " + count + " | " + sum);
             }
             writer.write(sql + "  /* sql-2*/\n");
             writer.close();

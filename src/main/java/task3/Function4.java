@@ -20,7 +20,7 @@ public class Function4 {
     }
 
     public void find(){
-        String sql = "select i.TrackId,Name,COUNT(CustomerId) from track left join invoiceline i on track.TrackId = i.TrackId left join invoice i2 on i2.InvoiceId = i.InvoiceId where InvoiceDate like '%2013%' group by Name order by count(Total) desc limit 1";
+        String sql = "select i.TrackId,Name,COUNT(CustomerId) as Count from track left join invoiceline i on track.TrackId = i.TrackId left join invoice i2 on i2.InvoiceId = i.InvoiceId where InvoiceDate like '%2013%' group by Name order by count(Total) desc limit 1";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -28,7 +28,7 @@ public class Function4 {
             while (resultSet.next()){
                 int id = resultSet.getInt("TrackId");
                 String name = resultSet.getString("Name");
-                int count = resultSet.getInt("COUNT(CustomerId)");
+                int count = resultSet.getInt("Count");
                 System.out.println(id + " | " + name + " | " + count);
             }
             writer.write(sql + "  /* sql-4*/\n");

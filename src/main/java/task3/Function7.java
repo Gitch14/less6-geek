@@ -20,14 +20,14 @@ public class Function7 {
     }
 
     public void find(){
-        String sql = "select m.Name,count(i.InvoiceId) from invoiceline left join invoice i on i.InvoiceId = invoiceline.InvoiceId left join track t on t.TrackId = invoiceline.TrackId left join mediatype m on m.MediaTypeId = t.MediaTypeId group by m.Name order by count(i.InvoiceId) desc limit 1";
+        String sql = "select m.Name as Media,count(i.InvoiceId) as Count from invoiceline left join invoice i on i.InvoiceId = invoiceline.InvoiceId left join track t on t.TrackId = invoiceline.TrackId left join mediatype m on m.MediaTypeId = t.MediaTypeId group by m.Name order by count(i.InvoiceId) desc limit 1";
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             FileWriter writer = new FileWriter(String.valueOf(fileCreate.getFile()),true);
             while (resultSet.next()){
-                String name = resultSet.getString("Name");
-                int count = resultSet.getInt("count(i.InvoiceId)");
+                String name = resultSet.getString("Media");
+                int count = resultSet.getInt("Count");
                 System.out.println(name + " | " + count);
             }
             writer.write(sql + "  /* sql-7*/\n");
